@@ -3,6 +3,7 @@
 Modiied TensorFlow-Slim image classfication repo for custom usage
 
 ##Usage
+
 ### Prepare for data set
 put the images into DATASET\_DIR, which contains several sub-directories. For example: DATASET_DIR=sample\_data/flowers, and in DATASET\_DIR, it contains three folders:
 
