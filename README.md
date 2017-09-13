@@ -4,7 +4,7 @@ Modiied TensorFlow-Slim image classfication repo for custom usage. The orginal r
 [https://github.com/tensorflow/models/tree/master/slim](https://github.com/tensorflow/models/tree/master/slim )
 
 
-##Usage
+## Usage
 
 ### Prepare for data set
 put the images into DATASET\_DIR, which contains several sub-directories. For example: DATASET_DIR=sample\_data/flowers, and in DATASET\_DIR, it contains three folders:
@@ -41,7 +41,7 @@ More options:
 
 The training and validaiton data and labels will be generated from the DATASET\_DIR and stored as TFRecords format in the TFRECORD\_DIR.  The training logs would be stored in the TRAIN\_DIR. 
 
-###TensorBoard
+### TensorBoard
 
 To visualize the losses and other metrics during training, you can use TensorBoard by running the command below.
 
