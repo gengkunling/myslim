@@ -24,6 +24,8 @@ from datasets import dataset_factory
 from deployment import model_deploy
 from nets import nets_factory
 from preprocessing import preprocessing_factory
+import my_data_descriptor
+import convert_mydata
 
 slim = tf.contrib.slim
 
@@ -165,13 +167,16 @@ tf.app.flags.DEFINE_float(
 #######################
 
 #tf.app.flags.DEFINE_string(
-#    'dataset_name', 'imagenet', 'The name of the dataset to load.')
+#   'dataset_name', 'imagenet', 'The name of the dataset to load.')
 
 tf.app.flags.DEFINE_string(
     'dataset_split_name', 'train', 'The name of the train/test split.')
 
 tf.app.flags.DEFINE_string(
     'dataset_dir', None, 'The directory where the dataset files are stored.')
+
+tf.app.flags.DEFINE_string(
+    'tfrecord_dir', None, 'The directory where the TFRecord files are stored.')
 
 tf.app.flags.DEFINE_integer(
     'labels_offset', 0,
@@ -380,8 +385,14 @@ def _get_variables_to_train():
 
 
 def main(_):
+  print(FLAGS.dataset_dir)
+  print(FLAGS.tfrecord_dir)
+
   if not FLAGS.dataset_dir:
     raise ValueError('You must supply the dataset directory with --dataset_dir')
+
+  if not FLAGS.tfrecord_dir:
+    raise ValueError('You must supply the dataset directory with --tfrecord_dir')
 
   tf.logging.set_verbosity(tf.logging.INFO)
   with tf.Graph().as_default():
@@ -402,10 +413,14 @@ def main(_):
     ######################
     # Select the dataset #
     ######################
-    dataset = dataset_factory.get_dataset(
-        FLAGS.dataset_name, FLAGS.dataset_split_name, FLAGS.dataset_dir)
+    #dataset = dataset_factory.get_dataset(
+    #    FLAGS.dataset_name, FLAGS.dataset_split_name, FLAGS.dataset_dir)
+    print("tfrecord dir:::", FLAGS.tfrecord_dir)
+    convert_mydata.run(FLAGS.dataset_dir, FLAGS.tfrecord_dir)
+    dataset = my_data_descriptor.get_split(FLAGS.dataset_split_name, FLAGS.tfrecord_dir)
 
     ######################
+    # Select the network #
     # Select the network #
     ######################
     network_fn = nets_factory.get_network_fn(
@@ -556,6 +571,8 @@ def main(_):
     ###########################
     # Kicks off the training. #
     ###########################
+
+
     slim.learning.train(
         train_tensor,
         logdir=FLAGS.train_dir,
