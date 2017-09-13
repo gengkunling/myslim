@@ -41,7 +41,7 @@ from datasets import dataset_utils
 #_DATA_DIR =
 
 # The number of images in the validation set.
-_NUM_VALIDATION = 1
+_NUM_VALIDATION = 10
 
 # Seed for repeatability.
 _RANDOM_SEED = 0
@@ -323,4 +323,4 @@ def run(dataset_dir, tfrecord_dir):
 
 
 
-run('sample_data/all_forms/', "tf_records/all_forms")
+#run('sample_data/all_forms/', "tf_records/all_forms")
