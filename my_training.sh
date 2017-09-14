@@ -61,7 +61,7 @@ python eval_image_classifier.py \
   --eval_dir=${TRAIN_DIR} \
   --dataset_name=flowers \
   --dataset_split_name=validation \
-  --dataset_dir=${DATASET_DIR} \
+  --tfrecord_dir=${TFRECORD_DIR} \
   --model_name=inception_v3
 
 
