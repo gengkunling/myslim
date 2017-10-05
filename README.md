@@ -54,7 +54,7 @@ python my_image_classifier.py \
   --checkpoint_path=${PRETRAINED_CHECKPOINT_DIR}/inception_v3.ckpt \
   --checkpoint_exclude_scopes=InceptionV3/Logits,InceptionV3/AuxLogits \
   --trainable_scopes=InceptionV3/Logits,InceptionV3/AuxLogits \
-  --max_number_of_steps=100 \
+  --max_number_of_steps=1000 \
   --batch_size=32 \
   --learning_rate=0.01 \
   --learning_rate_decay_type=fixed \
