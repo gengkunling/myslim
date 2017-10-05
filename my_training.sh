@@ -56,7 +56,7 @@ python my_image_classifier.py \
   --weight_decay=0.00004
 
 # Run evaluation.
-python eval_image_classifier.py \
+python my_eval_classifier.py \
   --checkpoint_path=${TRAIN_DIR} \
   --eval_dir=${TRAIN_DIR} \
   --dataset_name=flowers \
