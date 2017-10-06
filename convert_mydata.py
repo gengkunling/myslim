@@ -12,15 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-r"""Downloads and converts Flowers data to TFRecords of TF-Example protos.
+r"""Convert data to TFRecords of TF-Example protos.
 
-This module downloads the Flowers data, uncompresses it, reads the files
-that make up the Flowers data and creates two TFRecord datasets: one for train
-and one for test. Each TFRecord dataset is comprised of a set of TF-Example
+This module converts the images in the dataset_dir and  creates two TFRecord datasets:
+one for train and one for test. Each TFRecord dataset is comprised of a set of TF-Example
 protocol buffers, each of which contain a single image and label.
-
-The script should take about a minute to run.
-
 """
 
 from __future__ import absolute_import
@@ -36,12 +32,8 @@ import tensorflow as tf
 
 from datasets import dataset_utils
 
-# The URL where the Flowers data can be downloaded.
-#_DATA_URL = 'http://download.tensorflow.org/example_images/flower_photos.tgz'
-#_DATA_DIR =
-
 # The number of images in the validation set.
-_NUM_VALIDATION = 10
+_TRAIN_DATA_RATIO = 0.8
 
 # Seed for repeatability.
 _RANDOM_SEED = 0
@@ -302,6 +294,7 @@ def run(dataset_dir, tfrecord_dir):
   # Divide into train and test:
   random.seed(_RANDOM_SEED)
   random.shuffle(photo_filenames)
+  _NUM_VALIDATION = int(_TRAIN_DATA_RATIO * len(photo_filenames))
   training_filenames = photo_filenames[_NUM_VALIDATION:]
   validation_filenames = photo_filenames[:_NUM_VALIDATION]
 
