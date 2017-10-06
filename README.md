@@ -1,10 +1,16 @@
 # TensorFlow-Slim image classification model library
 
 Modiied TensorFlow-Slim image classfication repo for custom usage. The orginal repo is:
-[https://github.com/tensorflow/models/tree/master/slim](https://github.com/tensorflow/models/tree/master/slim )
+[https://github.com/tensorflow/models/tree/master/research/slim](https://github.com/tensorflow/models/tree/master/research/slim)
 
 
 ## Usage
+
+```
+./my_training.sh
+```
+
+Here is the basic description of the 'my_training.sh':
 
 ### Prepare for data set
 put the images into DATASET\_DIR, which contains several sub-directories. For example: DATASET_DIR=sample\_data/flowers, and in DATASET\_DIR, it contains three folders:
@@ -83,5 +89,8 @@ python my_eval_classifier.py \
 
 To visualize the losses and other metrics during training, you can use TensorBoard by running the command below.
 
+```
 tensorboard --logdir=${TRAIN_DIR}
+```
+
 Once TensorBoard is running, navigate your web browser to http://localhost:6006
