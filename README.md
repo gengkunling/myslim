@@ -37,6 +37,7 @@ DATASET_DIR=sample_data/flowers
 # Where the TFrecords are saved to.
 TFRECORD_DIR=tf_records/flowers
 
+
 # Download the pre-trained checkpoint.
 if [ ! -d "$PRETRAINED_CHECKPOINT_DIR" ]; then
   mkdir ${PRETRAINED_CHECKPOINT_DIR}
@@ -73,18 +74,7 @@ python my_image_classifier.py \
 
 The training and validaiton data and labels will be generated from the DATASET\_DIR and stored as TFRecords format in the TFRECORD\_DIR.  The training logs would be stored in the TRAIN\_DIR.
 
-### Run the evaluation
-```
-# Run evaluation.
-python my_eval_classifier.py \
-  --checkpoint_path=${TRAIN_DIR} \
-  --eval_dir=${TRAIN_DIR} \
-  --dataset_name=flowers \
-  --dataset_split_name=validation \
-  --tfrecord_dir=${TFRECORD_DIR} \
-  --model_name=inception_v3
 
-```
 ### TensorBoard
 
 To visualize the losses and other metrics during training, you can use TensorBoard by running the command below.
@@ -94,3 +84,18 @@ tensorboard --logdir=${TRAIN_DIR}
 ```
 
 Once TensorBoard is running, navigate your web browser to http://localhost:6006
+
+
+
+### Run the evaluation
+```
+VALID_DIR=valid_files
+# Run evaluation.
+python my_eval_classifier.py \
+  --checkpoint_path=${VALID_DIR} \
+  --eval_dir=${VALID_DIR} \
+  --dataset_split_name=validation \
+  --tfrecord_dir=${TFRECORD_DIR} \
+  --model_name=inception_v3
+
+```

@@ -22,6 +22,7 @@ DATASET_DIR=sample_data/flowers
 # Where the TFrecords are saved to.
 TFRECORD_DIR=tf_records/flowers
 
+
 # Download the pre-trained checkpoint.
 if [ ! -d "$PRETRAINED_CHECKPOINT_DIR" ]; then
   mkdir ${PRETRAINED_CHECKPOINT_DIR}
@@ -55,11 +56,11 @@ python my_image_classifier.py \
   --optimizer=rmsprop \
   --weight_decay=0.00004
 
+VALID_DIR=valid_files
 # Run evaluation.
 python my_eval_classifier.py \
-  --checkpoint_path=${TRAIN_DIR} \
-  --eval_dir=${TRAIN_DIR} \
-  --dataset_name=flowers \
+  --checkpoint_path=${VALID_DIR} \
+  --eval_dir=${VALID_DIR} \
   --dataset_split_name=validation \
   --tfrecord_dir=${TFRECORD_DIR} \
   --model_name=inception_v3
